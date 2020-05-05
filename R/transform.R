@@ -43,22 +43,6 @@ bbx_pad_height <- function(bbx, n=1, word=NULL, side="both"){
   bbm_to_bbx(m)
 }
 
-#' Functions for calculating with bbx
-#' These functions can calculate various metrix of bbx
-#' @param bbx character vector of bounding boxes to pad
-#'
-#' @return a vector of validated bbxes
-#' @rdname bbx_math
-#'
-#' @examples
-#' bbx_area("100 100 200 200")
-#'
-#' @export
-bbx_area <- function(bbx){
-  m <- bbx_to_bbm(bbx)
-  (m[,3]-m[,1])*(m[,4]-m[,2])
-}
-
 #' Functions for updating certain coordinates of bbx
 #' These functions can modify a vector of bbx
 #' @param bbx character vector of bounding boxes to update
