@@ -1,0 +1,17 @@
+Package: bbx
+Title: Bbox your world
+Version: 0.0.0.9000
+Authors@R: 
+    person(given = "Dmytro",
+           family = "Perepolkin",
+           role = c("aut", "cre"),
+           email = "dperepolkin@gmail.com",
+           comment = c(ORCID = "0000-0001-8558-6183"))
+Description: Helper functions for working with bounding boxes
+    for rasters.
+License: MIT + file LICENSE
+URL: https://github.com/dmi3kno/bbx
+BugReports: https://github.com/dmi3kno/bbx/issues
+Encoding: UTF-8
+Language: en
+LazyData: true
