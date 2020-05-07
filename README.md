@@ -171,20 +171,22 @@ bbx_pad_height("10 10 40 40", word="There\nbe\ndragons")
 #> [1] "10 0 40 50"
 ```
 
-### Intersection and aggregation
+### Intersection and ovelaps
 
 There are many circumstances where it is important to know whether one
 `bbx` is intersecting with another `bbx` (or to find a new `bbx` which
-is the intersection of the two above). Note that it is possible to
-supply either a single vector or a pair of vectors to this predicate
-function.
+is the intersection of the two above). Note you need to supply a pair of
+vectors to this predicate function (as it performs pair-wise
+comparison).
 
 ``` r
-bbx_intersects(c("5 1 7 3", "2 4 6 8")) # should return FALSE
+bbx_intersects("5 1 7 3", "2 4 6 8") # should return FALSE
 #> [1] FALSE
 bbx_intersects("5 1 7 3", "2 2 6 8") # should return TRUE
 #> [1] TRUE
 ```
+
+### Aggregation
 
 Once the intersection is assured, area of intesection can be calculated
 and returned as a new `bbx` object. If the bounding boxes are not
@@ -196,7 +198,7 @@ applied to `x2` and `y2`.
 bbx_intersect(c("5 1 7 3", "2 4 6 8")) # should return NA
 #> [1] NA
 bbx_intersect("5 1 7 3", "2 2 6 8")
-#> [1] "5 2 6 3"
+#> [1] "5 1 7 3"
 ```
 
 In some sense, `union` is opposite of `intersect`. Union is applying
@@ -205,18 +207,18 @@ In some sense, `union` is opposite of `intersect`. Union is applying
 ``` r
 bbx_union(c("5 1 7 3", "2 4 6 8"))
 #> [1] "2 1 7 8"
-bbx_union2(c("5 1 7 3", "2 4 6 8"), c("1 1 1 1"))
-#> [1] "1 1 7 3" "1 1 6 8"
+bbx_union(c("5 1 7 3", "2 4 6 8"), c("1 1 1 1"))
+#> [1] "2 1 7 8"
 ```
 
 However, there is an opportunity to use `bbx_union` (not `bbx_union2`)
 as aggregation function. You can pass your own aggregating function(s)
-into optional arguments of `bbx_union` to perform other types of
-aggregation. This example is aggregating height, but taking median of
-width.
+into arguments of `bbx_aggregate` to perform other types of aggregation.
+This example is aggregating height, but taking median of width.
 
 ``` r
-bbx_union(c("5 1 7 3", "2 4 6 8", "10 10 20 20"), fx1=median, fx2=median)
+bbx_aggregate(c("5 1 7 3", "2 4 6 8", "10 10 20 20"), 
+              fx1=median, fy1=min, fx2=median, fy2=max)
 #> [1] "5 1 7 20"
 ```
 
